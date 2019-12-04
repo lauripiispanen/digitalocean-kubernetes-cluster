@@ -7,3 +7,10 @@
   serial: 1
   roles:
     - keyscan-host
+
+- name: apply kubernetes master configuration to master nodes
+  hosts: kubernetes-master
+  remote_user: root
+
+  roles:
+  - kubernetes-master
