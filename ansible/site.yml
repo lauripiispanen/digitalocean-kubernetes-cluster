@@ -1,0 +1,9 @@
+---
+# This playbook deploys the entire Kubernetes cluster
+
+- name: keyscan remote hosts to ~/.ssh/known_hosts
+  hosts: all
+  gather_facts: no
+  serial: 1
+  roles:
+    - keyscan-host
