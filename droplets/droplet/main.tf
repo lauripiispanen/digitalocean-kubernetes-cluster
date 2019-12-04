@@ -26,12 +26,18 @@ variable "volume_id" {
   type = string
 }
 
+variable "ssh_keys" {
+  type = list(string)
+  default = []
+}
+
 resource "digitalocean_droplet" "droplet" {
   image  = var.image
   name   = var.name
   region = var.region
   size   = var.size
-  tags   = var.tags 
+  tags   = var.tags
+  ssh_keys = var.ssh_keys
 }
 
 resource "digitalocean_volume_attachment" "volume_attachment" {
