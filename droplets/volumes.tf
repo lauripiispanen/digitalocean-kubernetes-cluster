@@ -1,5 +1,10 @@
-data "digitalocean_volume" "kubernetes_master" {
-  name   = "kubernetes-master"
+data "digitalocean_volume" "kubernetes_master_1" {
+  name   = "kubernetes-master-1"
+  region = var.region
+}
+
+data "digitalocean_volume" "kubernetes_master_2" {
+  name   = "kubernetes-master-2"
   region = var.region
 }
 

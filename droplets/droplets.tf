@@ -1,9 +1,21 @@
-module "kubernetes_master" {
+module "kubernetes_master_1" {
   source = "./droplet"
-  name = "kubernetes-master"
-  volume_id = data.digitalocean_volume.kubernetes_master.id
+  name = "kubernetes-master-1"
+  volume_id = data.digitalocean_volume.kubernetes_master_1.id
   tags   = [
-    "firewall-ssh-only"
+    "firewall-ssh-only",
+    "kubernetes-master"
+  ]
+}
+
+
+module "kubernetes_master_2" {
+  source = "./droplet"
+  name = "kubernetes-master-2"
+  volume_id = data.digitalocean_volume.kubernetes_master_2.id
+  tags   = [
+    "firewall-ssh-only",
+    "kubernetes-master"
   ]
 }
 
@@ -12,7 +24,8 @@ module "kubernetes_worker_1" {
   name = "kubernetes-worker-1"
   volume_id = data.digitalocean_volume.kubernetes_worker_1.id
   tags   = [
-    "firewall-ssh-only"
+    "firewall-ssh-only",
+    "kubernetes-worker"
   ]
 }
 
@@ -21,7 +34,8 @@ module "kubernetes_worker_2" {
   name = "kubernetes-worker-2"
   volume_id = data.digitalocean_volume.kubernetes_worker_2.id
   tags   = [
-    "firewall-ssh-only"
+    "firewall-ssh-only",
+    "kubernetes-worker"
   ]
 }
 
