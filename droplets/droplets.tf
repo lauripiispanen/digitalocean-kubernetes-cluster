@@ -68,8 +68,10 @@ resource "digitalocean_firewall" "ssh-only" {
     source_addresses = [
       var.current_ip
     ]
+    source_tags = [
+      "firewall-ssh-only"
+    ]
   }
-
 }
 
 resource "digitalocean_firewall" "tcp-outbound" {
