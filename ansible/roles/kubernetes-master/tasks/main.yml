@@ -38,3 +38,9 @@
     name: kubectl=1.14.0-00
     state: present
     force: yes
+
+- name: get join command
+  shell: kubeadm token create --print-join-command >> join_command.txt
+  args:
+    chdir: $HOME
+    creates: join_command.txt

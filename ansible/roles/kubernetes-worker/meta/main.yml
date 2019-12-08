@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: user
+    vars:
+      username: kubernetes
+  
+  - role: kubernetes-dependencies

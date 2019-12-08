@@ -11,6 +11,30 @@
 - name: apply kubernetes master configuration to master nodes
   hosts: kubernetes-master
   remote_user: root
-
   roles:
   - kubernetes-master
+
+- name: apply kubernetes worker configuration to worker nodes
+  hosts: kubernetes-worker
+  remote_user: root
+
+  pre_tasks:
+  - name: Wait for join command to appear on master
+    wait_for:
+      path: $HOME/join_command.txt
+    delegate_to: "{{ groups['kubernetes-master'][0] }}"
+
+  - name: Read join command from master
+    slurp: 
+      src: $HOME/join_command.txt
+    register: join_command
+    delegate_to: "{{ groups['kubernetes-master'][0] }}"
+  
+  - name: Push join command to slaves
+    copy:
+      content: "{{ join_command.content | b64decode }}"
+      dest: $HOME/join_cluster
+      mode: '0740'
+
+  roles:
+  - kubernetes-worker
